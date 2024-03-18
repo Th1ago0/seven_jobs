@@ -1,10 +1,19 @@
 class VacanciesController < ApplicationController
+  skip_before_action :authenticate_company!, only: %i[show all]
   before_action :set_vacancy, only: [:show, :edit, :update, :destroy]
+
+def all
+    @vacancies = Vacancy.where(
+        available: true
+        ).order(created_at: :desc).page(params[:page]).per(10)
+end
 
   # GET /vacancies
   # GET /vacancies.json
   def index
-    @vacancies = Vacancy.all
+    @vacancies = current_company.vacancies.order(
+        created_at: :desc
+        ).page(params[:page]).per(2)
   end
 
   # GET /vacancies/1
@@ -14,7 +23,7 @@ class VacanciesController < ApplicationController
 
   # GET /vacancies/new
   def new
-    @vacancy = Vacancy.new
+    @vacancy = Vacancy.new(available: true)
   end
 
   # GET /vacancies/1/edit
@@ -24,7 +33,7 @@ class VacanciesController < ApplicationController
   # POST /vacancies
   # POST /vacancies.json
   def create
-    @vacancy = Vacancy.new(vacancy_params)
+    @vacancy = current_company.vacancies.build(vacancy_params)
 
     respond_to do |format|
       if @vacancy.save

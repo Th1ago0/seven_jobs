@@ -1,7 +1,8 @@
 @import "custom";
 @import "bootstrap/scss/bootstrap";
 @import "login";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 @use 'scss-reset/reset'; 
 
 body {
@@ -24,4 +25,13 @@ h1.impact-text{
 
 .bg-site-blue{
     background-color: $site-blue;
+}
+
+.th-text-color{
+    color:  #4f4f4f;
+}
+
+.page-item.active .page-link{
+    background-color: $site-blue;
+    border-color: $site-blue;
 }

@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Onebitjobs
+module SevenJobs
   class Application < Rails::Application
     config.to_prepare do
         Devise::RegistrationsController.layout "application"
